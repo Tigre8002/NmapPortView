@@ -1,4 +1,11 @@
 #!/usr/bin/python
+
+# ────────────────────────────────────────────────
+#           Made by: Tigre8002 
+#           Discord: tigr3_0x1f42
+#           GitHub: https://github.com/Tigre8002/
+# ────────────────────2026────────────────────────
+
 import sys
 import re
 import os
@@ -11,11 +18,6 @@ red = "\033[31m"
 green = "\033[32m"
 yellow = "\033[33m"
 blue = "\033[34m"
-
-"""
--c Copy Ports on grip file
--xf File xml
-"""
 
 def findPorts(filename):
     results = {}
@@ -42,10 +44,10 @@ def findPorts(filename):
 
 def helpMenu():
     print(f"{yellow}Nmap PortView 0.01{RESET}")
-    print(f"{green}Usage: nmapPortView.py [option] file {RESET}\n {red}Options:{RESET}")
+    print(f"{green}Usage: nmapPortView [option] file {RESET}\n {red}Options:{RESET}")
     print(f"{green}     -c --> Extracting open ports from Nmap grepable output.")
     print(f"{green}     -xF --> Create a summary page of ports from an Nmap XML file.")
-    print(f"{green}Examples:{RESET}\n{yellow}./nmapPortView.py -c portsDiscoveryGripFile \n./nmapPortView.py -xF xmlNmap")
+    print(f"{green}Examples:{RESET}\n{yellow}nmapPortView -c portsDiscoveryGripFile \nnmapPortView -xF xmlNmap")
 
 def printPorts(data):
     toClipBoard = ""
