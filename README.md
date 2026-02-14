@@ -1,68 +1,108 @@
-# NmapPortView 🦁
+# NmapPortView 
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python)
 ![Bash](https://img.shields.io/badge/Script-Bash-green?style=for-the-badge&logo=gnu-bash)
 ![Version](https://img.shields.io/badge/Version-0.01-yellow?style=for-the-badge)
 
-**NmapPortView** es una herramienta de automatización escrita en Python y Bash diseñada para agilizar el flujo de trabajo en pruebas de penetración (Pentesting) y CTFs. Su objetivo principal es reducir el tiempo que pasas copiando puertos manualmente o convirtiendo reportes.
+Made by Tigre8002
 
-![Vista Previa](imagen.png)
+**NmapPortView** is a Python-based automation tool designed to streamline workflows during penetration testing and CTFs. Its primary objective is to eliminate the manual effort spent copying port numbers or converting reports, allowing for a faster and more efficient transition from scanning to exploitation.
 
 ## 🚀 Características Principales
 
-* **⚡ Extracción Inteligente (`-c`)**:
-    * Analiza la salida *grepable* de Nmap (`-oG`).
-    * [cite_start]Detecta automáticamente direcciones IP y protocolos[cite: 2, 4].
-    * [cite_start]Muestra un resumen visual en la terminal con colores para identificar estados (Abierto/Cerrado)[cite: 7].
-    * [cite_start]**Portapapeles Automático**: Copia solo los números de los puertos abiertos separados por comas (ej: `22,80,443`), listo para pegar en tu siguiente escaneo[cite: 8].
+* **⚡ Smart Extraction (`-c`)**:
+    * Parses Nmap grepable output (`-oG`).
+    * Automatically detects IP addresses and protocols.
+    * Displays a visual terminal summary with color-coded port states (Open/Closed).
+    * **Automatic Clipboard**:Extracts only open port numbers as a comma-separated list (e.g., ``22,80,443``) and copies them to your clipboard, ready for your next scan.
 
-* **📄 Conversión de Reportes (`-xF`)**:
-    * Transforma archivos XML de Nmap (`-oX`) en reportes HTML estéticos y legibles.
-    * [cite_start]Utiliza `xsltproc` para la conversión en el backend[cite: 9].
-    * [cite_start]Genera un archivo temporal en `/tmp/` para mantener limpio tu entorno[cite: 9].
-    * [cite_start]**Enlace Rápido**: Copia automáticamente la ruta `file://...` al portapapeles para que solo tengas que hacer `Ctrl+V` en tu navegador[cite: 9].
+* **📄 Report Conversion(`-xF`)**:
+    * Transforms Nmap XML files (`-oX`) into aesthetic and readable HTML reports.
+    * Utilizes`xsltproc` for the backend conversion.
+    * Generates a temporary file in `/tmp/` to keep your environment clean.
+    * **Quick Link: Automatically copies the` file://... path` to the clipboard so you only have to `Ctrl+V` into your browser.
+
 
 * **🐧 Multi-Plataforma**:
     * El instalador detecta tu distribución y configura el entorno automáticamente.
 
 ## 📋 Compatibilidad del Instalador
 
-El script `install.sh` gestiona automáticamente las dependencias (`xsltproc`, `pyperclip`) en las siguientes distribuciones:
+El script `install.sh` gestiona automáticamente las dependencias (`xsltproc`) en las siguientes distribuciones:
 
-| Sistema Operativo | Gestor de Paquetes | Estado |
+| Operating System | Package  Manager | Status |
 |-------------------|--------------------|--------|
-| **Debian / Kali / Ubuntu / Pop!_OS** | `apt` | ✅ Soportado |
-| **Arch / Manjaro** | `pacman` | ✅ Soportado |
-| **Fedora / CentOS / RHEL** | `dnf` | ✅ Soportado |
-| **Alpine Linux** | `apk` | ✅ Soportado |
-| **macOS** | `brew` | ✅ Soportado |
+| **Debian / Kali / Ubuntu / Pop!_OS** | `apt` | ✅  |
+| **Arch / Manjaro** | `pacman` | ✅  |
+| **Fedora / CentOS / RHEL** | `dnf` | ✅  |
+| **Alpine Linux** | `apk` | ✅  |
+| **macOS** | `brew` | ✅  |
 
-## 🛠️ Instalación
+## 🛠️ Installation
+- Note: You must have pyperclip installed.
 
-1.  **Clona el repositorio:**
+1.  **Clone :**
     ```bash
     git clone [https://github.com/Tigre8002/nmapPortView.git](https://github.com/Tigre8002/nmapPortView.git)
     cd nmapPortView
     ```
 
-2.  **Ejecuta el instalador automático:**
-    Da permisos de ejecución al script y lánzalo. El script instalará las dependencias de Python y del sistema, y moverá la herramienta a `/usr/local/bin`.
+2.  **Run the installer:**
+ Grant execution permissions to the script and run it. The script will automatically install Python and system dependencies, then move the tool to /`usr/local/bin`
     ```bash
     chmod +x install.sh
     ./install.sh
     ```
-    *(Pulsa 'Y' cuando el script te pregunte para confirmar la instalación)*.
+    *(Put Y)*.
 
-## 📖 Guía de Uso
+## 📖 Usage Guide
 
-Una vez instalado, puedes invocar `nmapPortView` desde cualquier ruta en tu terminal.
+Once installed, you can invoke `nmapPortView` from any path in your terminal.
 
-### 1. Trabajando con Puertos (Modo Grepable)
+### 1. Trabajando con Puertos (Mode Grepable)
 Extrae los puertos abiertos de un archivo generado con `nmap -oG`.
 
+![til](https://github.com/Tigre8002/nmapPortView/blob/main/Assets/Copy.gif)
+
 ```bash
-# 1. Generar archivo grepable
+# 1. File grepable
 nmap -p- --min-rate 5000 -oG allPorts 192.168.1.10
 
-# 2. Extraer puertos
+# 2. Extracts ports
 nmapPortView -c allPorts
+
+Output -->
+--- Results for 192.168.1.10 ---
+[TCP]
+  Port 135: open
+  Port 139: open
+  Port 445: open
+  Port 902: open
+  Port 912: open
+  Port 5040: open
+  Port 49665: open
+  Port 49668: open
+  Port 49669: open
+  Port 57621: open
+  Port 60831: open
+  Port 60832: open
+  Port 64165: open
+
+[+]-It has a copy to the clipboard with the ports.
+```
+
+### 2. Works with ports (Mode XML)
+![til](https://github.com/Tigre8002/nmapPortView/blob/main/Assets/XMLGif.gif)
+
+Extract open ports from a file generated with nmap -oX:1
+```bash
+# 1. XML File
+nmap -p- --min-rate 5000 -oX allPorts 192.168.1.10
+
+# 2. Extract puertos
+nmapPortView -xF allPorts
+
+Output: 
+Link --> file:///tmp/508301/508301.html
+[!]-The link has been copied. Paste it into your browser.
+```
